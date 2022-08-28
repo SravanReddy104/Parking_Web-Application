@@ -40,19 +40,40 @@ app.get("/messages", (req, res) => {
     }
   });
 });
+app.get("/count",async (req,res)=>{
+  var value;
+await data.countDocuments().then((resss)=>res.send(JSON.stringify(resss)));
+
+ 
+ 
+ })
+  
 app.post("/delete", (req, res) => {
   console.log("hello");
   const vechileNo1 = req.body;
-  console.log(vechileNo1);
-  const data1 = db.collection("parkingdata");
+  console.log("in delete");
 
-  
-    data.deleteOne({} , function (err, res) {
-      if (err) {
-        console.log(err)
-      };
-      console.log("1 document updated");
-    });
+  data.deleteOne(vechileNo1, function (err, res) {
+    if (err) {
+      console.log(err);
+    }
+    console.log("1 document updated");
+  });
 });
+app.post("/update",(req,res)=>{
+  console.log("update");
+  const vechileNo1 = req.body;
+  data.updateOne({vechileNo:vechileNo1["vechileNo"]},{$set:{checkOut:vechileNo1["checkOut"]}},function(err,res){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log("updated");
+    }
+    
+   
+  })
+  console.log("v",vechileNo1["vechileNo"])
+})
 
 app.listen(port, () => console.log(`Listening at ${port}`));

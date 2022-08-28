@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 
 const data = mongoose.Schema({
     username:String,
-    vechileNo:Number,
+    vechileNo:String,
     checkIn:String,
-    checkOut:Boolean
+    checkOut:String
 });
 export default mongoose.model('parkingdata',data);
